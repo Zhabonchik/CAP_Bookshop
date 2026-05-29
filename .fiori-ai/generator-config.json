@@ -1,0 +1,32 @@
+{
+    "version": "0.2",
+    "floorplan": "FE_FEOP",
+    "project": {
+        "name": "books-ui",
+        "targetFolder": "/home/user/projects/bookshop",
+        "title": "Books",
+        "description": "Manage and edit book records with draft support",
+        "ui5Version": "1.136.0",
+        "localUI5Version": "1.82.2",
+        "sapux": true
+    },
+    "service": {
+        "servicePath": "/odata/v4/service/bookshop_cds/",
+        "capService": {
+            "projectPath": "/home/user/projects/bookshop",
+            "serviceName": "bookshop_cdsSrv",
+            "serviceCdsPath": "srv/service"
+        }
+    },
+    "entityConfig": {
+        "mainEntity": {
+            "entityName": "Books"
+        },
+        "generateFormAnnotations": true
+    },
+    "projectTemplateType": "FORM_ENTRY_OBJECT_PAGE",
+    "telemetryData": {
+        "generationSourceName": "AI Headless",
+        "generationSourceVersion": "1.25.0"
+    }
+}

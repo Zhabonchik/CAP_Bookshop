@@ -1,0 +1,6 @@
+ID;title;isbn;publishedDate;price;createdAt;createdBy;modifiedAt;modifiedBy
+8f6f0cd0-d452-4fdb-9c8e-46234b343b9a;Harry Potter and the Sorcerer's Stone;978-0439708180;2021-06-27;19.99;2021-06-27T14:52:23Z;admin;2021-06-27T14:52:23Z;admin
+b2d52a7b-cb1f-451a-8d7b-13acbcfe58e0;A Game of Thrones;978-0553103540;2021-06-27;29.99;2021-06-27T14:52:23Z;admin;2021-06-27T14:52:23Z;admin
+e3eefd64-d355-45c4-91ef-a75242028c44;The Hobbit;978-0618968633;2021-06-27;14.99;2021-06-27T14:52:23Z;admin;2021-06-27T14:52:23Z;admin
+72a9d1e1-bfa0-4241-a7e8-1f1a2695af34;Murder on the Orient Express;978-0062693662;2021-06-27;12.99;2021-06-27T14:52:23Z;admin;2021-06-27T14:52:23Z;admin
+83e54353-0d27-4819-8adf-b4b837354af4;Foundation;978-0553293357;2021-06-27;24.99;2021-06-27T14:52:23Z;admin;2021-06-27T14:52:23Z;admin

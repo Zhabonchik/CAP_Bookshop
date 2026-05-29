@@ -1,0 +1,32 @@
+{
+  "name": "bookshop-cds",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@sap/cds-dk": "^9.7.2",
+    "@sap/cds-foss": "^5.0.2",
+    "cds-plugin-ui5": "^0.13.0",
+    "rimraf": "^5.0.5",
+    "mbt": "^1.2.49"
+  },
+  "dependencies": {
+    "@sap/cds": "9.9.1"
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "scripts": {
+    "watch-authors-books": "cds watch --open authorsbooks/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-books-authors-management": "cds watch --open booksauthorsmanagement/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "undeploy": "cf undeploy bookshop --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "sapux": [
+    "app/authors-books",
+    "app/bookshop_ui",
+    "app/books-authors-management",
+    "app/books_ui",
+    "app/authors_ui",
+    "app/books_authors_ui"
+  ]
+}
