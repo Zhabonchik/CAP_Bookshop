@@ -97,14 +97,14 @@ modules:
               ServiceKeyName: bookshop-repo-host-key
               sap.cloud.service: bookshop.service
             - Name: bookshop-uaa
-              Authentication: OAuth2UserTokenExchange
+              Authentication: OAuth2ClientCredentials
               ServiceInstanceName: bookshop-auth
               ServiceKeyName: bookshop-auth-key
               sap.cloud.service: bookshop.service
             - Name: bookshop-srv-api
               Description: Backend Java Service for Bookshop
               URL: ~{srv-api/srv-url}
-              Authentication: OAuth2UserTokenExchange
+              Authentication: OAuth2ClientCredentials
               TokenServiceInstanceName: bookshop-auth
               TokenServiceKeyName: bookshop-auth-key
               HTML5.DynamicDestination: true
