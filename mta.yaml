@@ -104,8 +104,6 @@ modules:
             - Name: bookshop-srv-api
               Description: Backend Java Service for Bookshop
               URL: ~{srv-api/srv-url}
-              Type: HTTP
-              ProxyType: Internet
               Authentication: OAuth2UserTokenExchange
               TokenServiceInstanceName: bookshop-auth
               TokenServiceKeyName: bookshop-auth-key
