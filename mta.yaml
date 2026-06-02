@@ -43,7 +43,6 @@ modules:
       - name: bookshop-repo-host
         parameters:
           content-target: true
-      - name: bookshop-launchpad-service
     build-parameters:
       build-result: resources
       requires:
@@ -158,12 +157,7 @@ resources:
             - "x509"
           redirect-uris:
             - https://*.${default-domain}/** # <-- FIXED: Uses standard landscape wildcards now
-  - name: bookshop-launchpad-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: launchpad
-      service-plan: standard
-    
+
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
