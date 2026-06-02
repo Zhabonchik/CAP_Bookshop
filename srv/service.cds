@@ -1,6 +1,6 @@
 using { bookshop_cds as my } from '../db/schema.cds';
 
-@path: ''/service/bookshop_cds
+@path: '/service/bookshop_cds'
 service bookshop_cdsSrv {
   
   @odata.draft.enabled

@@ -92,27 +92,6 @@ modules:
       supported-platforms:
         []
 
-  - name: bookshop
-    type: approuter.nodejs
-    path: app/router
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
-    requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-          forwardAuthToken: true
-      - name: bookshop-auth
-    provides:
-      - name: app-api
-        properties:
-          app-protocol: ${protocol}
-          app-uri: ${default-uri}
-          url: ${default-url}
 resources:
   - name: bookshop-db
     type: com.sap.xs.hdi-container
@@ -127,9 +106,11 @@ resources:
       service-plan: app-host
   - name: bookshop-destination-service
     type: org.cloudfoundry.managed-service
+    requires:
+      - name: srv-api # <-- FIXED: Allows resolution of ~{srv-api/srv-url}
     parameters:
       config:
-        HTML5Runtime_enabled: false
+        HTML5Runtime_enabled: true
         init_data:
           instance:
             destinations:
@@ -138,6 +119,13 @@ resources:
                 ProxyType: Internet
                 Type: HTTP
                 URL: https://ui5.sap.com
+              - Name: bookshop-srv-api
+                Description: Backend Java Service for Bookshop
+                URL: ~{srv-api/srv-url}
+                Type: HTTP
+                ProxyType: Internet
+                Authentication: OAuth2UserTokenExchange
+                forwardAuthToken: true
             existing_destinations_policy: update
         version: 1.0.0
       service: destination
@@ -157,9 +145,8 @@ resources:
             - "binding-secret"
             - "x509"
           redirect-uris:
-            - https://*~{app-api/app-uri}/**
-    requires:
-      - name: app-api
+            - https://*.${default-domain}/** # <-- FIXED: Uses standard landscape wildcards now
+    
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
