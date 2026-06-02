@@ -43,6 +43,7 @@ modules:
       - name: bookshop-repo-host
         parameters:
           content-target: true
+      - name: bookshop-launchpad-service
     build-parameters:
       build-result: resources
       requires:
@@ -108,6 +109,8 @@ resources:
     type: org.cloudfoundry.managed-service
     requires:
       - name: srv-api # <-- FIXED: Allows resolution of ~{srv-api/srv-url}
+      - name: bookshop-repo-host
+      - name: bookshop-auth
     parameters:
       config:
         HTML5Runtime_enabled: true
@@ -126,6 +129,15 @@ resources:
                 ProxyType: Internet
                 Authentication: OAuth2UserTokenExchange
                 forwardAuthToken: true
+              - Name: bookshop-html5-repo-host
+                ServiceInstanceName: bookshop-html5-service
+                ServiceKeyName: bookshop-repo-host-key
+                sap.cloud.service: bookshop.service
+              - Authentication: OAuth2UserTokenExchange
+                Name: bookshop-uaa
+                ServiceInstanceName: bookshop-auth
+                ServiceKeyName: bookshop-auth-key
+                sap.cloud.service: bookshop.service
             existing_destinations_policy: update
         version: 1.0.0
       service: destination
@@ -146,6 +158,11 @@ resources:
             - "x509"
           redirect-uris:
             - https://*.${default-domain}/** # <-- FIXED: Uses standard landscape wildcards now
+  - name: bookshop-launchpad-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: launchpad
+      service-plan: standard
     
 parameters:
   deploy_mode: html5-repo
