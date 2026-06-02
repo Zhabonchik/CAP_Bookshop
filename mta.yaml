@@ -58,6 +58,48 @@ modules:
             - booksauthorsui.zip
           name: booksauthorsui
           target-path: resources/
+  - name: bookshop-destinations
+    type: com.sap.application.content
+    requires:
+      - name: bookshop-html5-repo-runtime
+        parameters:
+          service-key:
+            name: bookshop-html5-repo-runtime-key
+      - name: bookshop-auth
+        parameters:
+          service-key:
+            name: bookshop-auth-key
+      - name: bookshop-repo-host
+        parameters:
+          service-key:
+            name: bookshop-repo-host-key
+      - name: srv-api
+      - name: bookshop-destination-service
+        parameters:
+          content-target: true
+    build-parameters:
+      no-source: true
+    parameters:
+      content:
+        subaccount:
+          destinations:
+            - Name: bookshop-cdm
+              ServiceInstanceName: bookshop-html5-runtime-service
+              ServiceKeyName: bookshop-html5-repo-runtime-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/bookshop.service
+              HTML5.DynamicDestination: true
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: bookshop-html5-repository
+              ServiceInstanceName: bookshop-html5-service
+              ServiceKeyName: bookshop-repo-host-key
+              sap.cloud.service: bookshop.service
+            - Name: bookshop-uaa
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: bookshop-auth
+              ServiceKeyName: bookshop-auth-key
+              sap.cloud.service: bookshop.service
   - name: booksui
     type: html5
     path: app/books_ui
@@ -104,6 +146,12 @@ resources:
       service: html5-apps-repo
       service-name: bookshop-html5-service
       service-plan: app-host
+  - name: bookshop-html5-repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: bookshop-html5-runtime-service
+      service-plan: app-runtime
   - name: bookshop-destination-service
     type: org.cloudfoundry.managed-service
     requires:
