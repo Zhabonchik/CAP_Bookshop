@@ -101,6 +101,16 @@ modules:
               ServiceInstanceName: bookshop-auth
               ServiceKeyName: bookshop-auth-key
               sap.cloud.service: bookshop.service
+            - Name: bookshop-srv-api
+              Description: Backend Java Service for Bookshop
+              URL: ~{srv-api/srv-url}
+              Type: HTTP
+              ProxyType: Internet
+              Authentication: OAuth2UserTokenExchange
+              TokenServiceInstanceName: bookshop-auth
+              TokenServiceKeyName: bookshop-auth-key
+              HTML5.DynamicDestination: true
+              HTML5.ForwardAuthToken: true
   - name: booksui
     type: html5
     path: app/books_ui
@@ -155,8 +165,6 @@ resources:
       service-plan: app-runtime
   - name: bookshop-destination-service
     type: org.cloudfoundry.managed-service
-    requires:
-      - name: srv-api
     parameters:
       config:
         HTML5Runtime_enabled: true
@@ -168,13 +176,6 @@ resources:
                 ProxyType: Internet
                 Type: HTTP
                 URL: https://ui5.sap.com
-              - Name: bookshop-srv-api
-                Description: Backend Java Service for Bookshop
-                URL: ~{srv-api/srv-url}
-                Type: HTTP
-                ProxyType: Internet
-                Authentication: OAuth2UserTokenExchange
-                forwardAuthToken: true
             existing_destinations_policy: update
         version: 1.0.0
       service: destination
