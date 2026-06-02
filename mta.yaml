@@ -107,9 +107,7 @@ resources:
   - name: bookshop-destination-service
     type: org.cloudfoundry.managed-service
     requires:
-      - name: srv-api # <-- FIXED: Allows resolution of ~{srv-api/srv-url}
-      - name: bookshop-repo-host
-      - name: bookshop-auth
+      - name: srv-api
     parameters:
       config:
         HTML5Runtime_enabled: true
@@ -128,15 +126,6 @@ resources:
                 ProxyType: Internet
                 Authentication: OAuth2UserTokenExchange
                 forwardAuthToken: true
-              - Name: bookshop-html5-repo-host
-                ServiceInstanceName: bookshop-html5-service
-                ServiceKeyName: bookshop-repo-host-key
-                sap.cloud.service: bookshop.service
-              - Authentication: OAuth2UserTokenExchange
-                Name: bookshop-uaa
-                ServiceInstanceName: bookshop-auth
-                ServiceKeyName: bookshop-auth-key
-                sap.cloud.service: bookshop.service
             existing_destinations_policy: update
         version: 1.0.0
       service: destination
@@ -156,7 +145,7 @@ resources:
             - "binding-secret"
             - "x509"
           redirect-uris:
-            - https://*.${default-domain}/** # <-- FIXED: Uses standard landscape wildcards now
+            - https://*.${default-domain}/**
 
 parameters:
   deploy_mode: html5-repo
