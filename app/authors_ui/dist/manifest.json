@@ -185,6 +185,10 @@
 		},
 		"flexBundle": false
 	},
+	"sap.cloud": {
+		"service": "bookshop.service",
+		"public": true
+	},
 	"sap.fiori": {
 		"registrationIds": [],
 		"archeType": "transactional"
