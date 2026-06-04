@@ -2,6 +2,54 @@
   "xsappname": "bookshop",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
-  "scopes": [],
-  "role-templates": []
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.ViewBooks",
+      "description": "View Books"
+    },
+    {
+      "name": "$XSAPPNAME.ViewAuthors",
+      "description": "View Authors"
+    },
+    {
+      "name": "$XSAPPNAME.ViewBooksAuthors",
+      "description": "View BooksAuthors"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Admin",
+      "description": "Can view Authors, Books and BooksAuthors",
+      "scope-references": [
+        "$XSAPPNAME.ViewBooks",
+        "$XSAPPNAME.ViewAuthors",
+        "$XSAPPNAME.ViewBooksAuthors"
+      ]
+    },
+    {
+      "name": "Viewer",
+      "description": "Can view Authors and Books",
+      "scope-references": [
+        "$XSAPPNAME.ViewBooks",
+        "$XSAPPNAME.ViewAuthors"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "Bookshop_Viewer",
+      "description": "Bookshop viewer",
+      "role-template-references": [
+        "$XSAPPNAME.Viewer"
+      ]
+    },
+    {
+      "name": "Bookshop_Admin",
+      "description": "Bookshop viewer",
+      "role-template-references": [
+        "$XSAPPNAME.Admin"
+      ]
+    }
+  ],
+  "attributes": []
 }
